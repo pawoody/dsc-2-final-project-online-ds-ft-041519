@@ -1,8 +1,10 @@
 
 ## Northwind Co: Company Sales Analysis
-Flatiron Module 2 Project: Paul Woody
+Flatiron Module 2 Project: 
 <br>
-Annotated code can be found [here](https://github.com/pawoody/dsc-2-final-project-online-ds-ft-041519/blob/master/Mod%202%20Project.ipynb).
+Paul Woody
+<br>
+*Annotated code can be found [here](https://github.com/pawoody/dsc-2-final-project-online-ds-ft-041519/blob/master/Mod%202%20Project.ipynb).*
 
 ![Paul](Paul.jpeg)
 
@@ -17,6 +19,8 @@ To complete our analysis, we will follow the OSEMN Data Science process as outli
 
 
 # Obtain / Load Data:
+
+Let's verify the accuracy of the provided ERD:
 
 ```
 # Viewing Table Names to compare with ERD:
@@ -273,13 +277,8 @@ Reviewing the data to answer some of the questions above should give us insight 
 </div>
 
 
-```python
-df_customer_demo = df_customer.groupby(['Region'])['CompanyName'].count()
-df_customer_demo.head()
-```
 
-
-
+Regions:
 
     Region
     British Isles       8
@@ -292,10 +291,7 @@ df_customer_demo.head()
 
 
 
-```python
-df_customer_demo_country = df_customer.groupby(['Country'])['CompanyName'].count()
-df_customer_demo_country
-```
+Countries:
 
     Country
     Argentina       3
@@ -751,11 +747,11 @@ stats.ttest_ind(df_discount_bool.Quantity, df_nodiscount_bool.Quantity, equal_va
 
 
 #### 1a. Do discounts have a statistically significant effect on the number of products customers order?
-```
+
 * $H_{0}:$ Discount has no effect on the number of products ordered.
 * $H_{a}:$ Discount does have an effect on number of products ordered.
 * $\alpha$ = 0.05
-```
+
 
 The resulting p-value of our two-tailed Welch's t-test is 1.00e$^{-10}$.
 
@@ -768,14 +764,11 @@ The resulting p-value is less than our alpha value of 0.05. Therefore, we reject
 ### 1b. If so, at what level(s) of discount?
 
 * $H_{0}:$ The average number of products ordered by customers is the same regardless of discount level.
-<br>
 * $H_{a}:$ The average number of products ordered by customers is not the same as discount level changes.
-<br>
 * $\alpha$ = 0.05
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_94_0.png)
-
 
 
 
@@ -815,12 +808,11 @@ print(tk)
 
 #### 1b. If so, at what level(s) of discount?
 
-* $H_{0}:$ The number of products ordered by customers is the same regardless of discount level.
-<br>
-* $H_{a}:$ The number of products ordered by customers is not the same as discount level changes. 
-<br>
-* $\alpha$ = 0.05
 
+* $H_{0}:$ The number of products ordered by customers is the same regardless of discount level.
+* $H_{a}:$ The number of products ordered by customers is not the same as discount level changes. 
+* $\alpha$ = 0.05
+<br>
 
 Reviewing the results of the Tukey test, we fail to reject the null hypothesis that there is a significant difference between the control group (no discount) and the experimental group discount level 0.10. 
 
@@ -843,9 +835,7 @@ Essentially, we need to determine whether or not customers spend more when disco
 ### 2a. Do discounts have a statistically significant effect on customer spend?
 
 * $H_{0}:$ Discounts do not have a statistically significant effect customer spend.
-<br>
 * $H_{a}:$ Discounts do have a statistically significant effect (whether positive or negative) on customer spend.
-<br>
 * $\alpha$ = 0.05
 
 <div>
@@ -929,9 +919,6 @@ A visual examination of the distribution of Order Revenue suggests that we shoul
 variance_ratio(a=df_log_discount_spend_disc.LogOrderPrice, b=df_log_discount_spend_nodisc.LogOrderPrice)
 ```
 
-
-
-
     1.0836127695528326
 
 
@@ -949,9 +936,7 @@ stats.ttest_ind(df_log_discount_spend_disc.LogOrderPrice, df_log_discount_spend_
 
 
 * $H_{0}:$ Discounts do not have a statistically significant effect on average customer spend.
-<br>
 * $H_{a}:$ Discounts do have a statistically significant effect (whether positive or negative) on average customer spend.
-<br>
 * $\alpha$ = 0.05
 
 
@@ -962,9 +947,7 @@ Because p > 0.05 we fail to reject the null hypothesis that states that discount
 ### 2b. At what level(s) of discount is there a significant effect on average customer spend?
 
 * $H_{0}:$ Customer order price is the same regardless of discount level.
-<br>
 * $H_{a}:$ Customer order price is not the same as discount level changes.
-<br>
 * $\alpha$ = 0.05
 
 
@@ -1130,9 +1113,7 @@ print(tk2)
 ### 3a. Do discounts have a statistically significant effect on the number of products customers order by category?
 
 * $H_{0}:$ Discounts do not have a statistically significant effect on number of products customers order by category.
-<br>
 * $H_{a}:$ Discounts either increase or decrease the number of products customers order by category.
-<br>
 * $\alpha$ = 0.05
 
 
@@ -1232,7 +1213,6 @@ Because p < 0.05, we reject the null hypothesis that there is no significant dif
 ![png](Mod%202%20Project_files/Mod%202%20Project_175_0.png)
 
 
-
 ```python
 tk3 = pairwise_tukeyhsd(df_log_discount_category_spend.Quantity, df_log_discount_category_spend.CategoryName, .05)
 print(tk3)
@@ -1278,9 +1258,7 @@ print(tk3)
 ### 4a. Is total all-time revenue generated equal across all employees?
 
 * $H_{0}:$ There is no difference between all-time revenue generated across all employees.
-<br>
 * $H_{a}:$ There is a difference between all-time revenue generated across all employees.
-<br>
 * $\alpha$ = 0.05
 
 
@@ -1462,9 +1440,7 @@ However, we still don't have details on how long each employee has worked at Nor
 ### 4b. Is average Order Revenue equal across all employees in 2014?
 
 * $H_{0}:$ There is no difference in average Order Revenue generated across all employees in 2014.
-<br>
 * $H_{a}:$ There is a difference in average Order Revenue generated across all employees in 2014.
-<br>
 * $\alpha$ = 0.05
 
 <div>
@@ -1599,16 +1575,13 @@ print(tk5)
 ### 5a. Is Q1 Order Revenue for 2014 significantly greater than Q1 Order Revenue from 2013?
 
 * $H_{0}:$ Average Order Revenue for Q1 2014 is not greater than that of 2013.
-<br>
 * $H_{a}:$ Average Order Revenue for Q1 2014 is greater than that of 2013.
-<br>
 * $\alpha$ = 0.05
 
 
 *Note: As we're seeking to determine whether one value is greater than the other, we'll use a one-tailed test.*
 
 ```
-
     2014-05-06
 
     Month
@@ -1635,11 +1608,10 @@ For this reason, we'll compare the average Order Revenue from each sample.
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_228_0.png)
 
-Q1 Sales Data Visualization:
+
 ![png](Mod%202%20Project_files/Mod%202%20Project_229_0.png)
 
 
-Distribution of mean revenue:
 ![png](Mod%202%20Project_files/Mod%202%20Project_230_0.png)
 
 
@@ -1673,9 +1645,7 @@ pvalue < .05
 #### 5a. Is Average Q1 Order Revenue for 2014 significantly greater than Average Q1 Order Revenue from 2013?
 
 * $H_{0}:$ Average Order Revenue for Q1 2014 is not greater than that of 2013.
-<br>
 * $H_{a}:$ Average Order Revenue for Q1 2014 is greater than that of 2013.
-<br>
 * $\alpha$ = 0.05
 
 
