@@ -1,6 +1,7 @@
 
 ## Northwind Co: Company Sales Analysis
 Flatiron Module 2 Project: Paul Woody
+Annotated code can be found [here](https://github.com/pawoody/dsc-2-final-project-online-ds-ft-041519/blob/master/Mod%202%20Project.ipynb).
 
 ![Paul](Paul.jpeg)
 
@@ -16,10 +17,7 @@ To complete our analysis, we will follow the OSEMN Data Science process as outli
 
 # Obtain / Load Data:
 
-```python
-from sqlalchemy import inspect
-inspector = inspect(engine)
-
+```
 # Viewing Table Names to compare with ERD:
 print(inspector.get_table_names())
 ```
@@ -57,57 +55,6 @@ Sample output:
 Now that the dataset has been loaded, we should familiarize ourselves with Northwind and what they do as a company prior to forming specific inquiries and queries. For each table in the Northwind Database, we'll preview the contents, properly account for null values, and ensure that column data is stored in the proper format prior to hypothesis testing.
 
 ## Category Table Scrubbing:
-
-
-```python
-# Viewing Category Table:
-df_category.head(3)
-```
-
-
-
-
-<div>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Id</th>
-      <th>CategoryName</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Beverages</td>
-      <td>Soft drinks, coffees, teas, beers, and ales</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Condiments</td>
-      <td>Sweet and savory sauces, relishes, spreads, an...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Confections</td>
-      <td>Desserts, candies, and sweet breads</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-```python
-# Visualizing Category Names:
-df_category.groupby(['CategoryName']).head(10)
-```
-
-
-
 
 <div>
 
@@ -181,13 +128,6 @@ Based on the contents of the Category Table, we can reasonably conclude that Nor
 ### Product Table Scrubbing:
 
 Now that we have a broad idea of what Northwind does, let's peruse the products they sell.
-
-
-```python
-# Reviewing Product DataFrame:
-df_product.head(3)
-```
-
 
 <div>
 
@@ -263,12 +203,6 @@ In a future project, Northwind may also consider investigating the sales perform
 After defining what it is Northwind does, we should next explore Northwind's customer dataset. Is Northwind a local distributor? Where are Northwind's customers located? Is Northwind's target demographic clear?
 
 Reviewing the data to answer some of the questions above should give us insight into potential pitfalls faced by Northwind as well as to guide the scope of our inquiry. Based on differences in regional sales performance, it may be prudent to prioritize expansion in a particular region, change marketing strategies (such as discounts) in specific regions, or hire additional employees.
-
-
-```python
-# Viewing Customer DataFrame:
-df_customer.head(3)
-```
 
 
 <div>
@@ -399,116 +333,6 @@ Should Northwind continue to expand in some of the "smaller" countries with less
 
 ### Employee Table Scrubbing:
 
-
-```python
-# Reviewing Employee DataFrame:
-df_employee.head(3)
-```
-
-
-<div>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Id</th>
-      <th>LastName</th>
-      <th>FirstName</th>
-      <th>Title</th>
-      <th>TitleOfCourtesy</th>
-      <th>BirthDate</th>
-      <th>HireDate</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>Region</th>
-      <th>PostalCode</th>
-      <th>Country</th>
-      <th>HomePhone</th>
-      <th>Extension</th>
-      <th>Photo</th>
-      <th>Notes</th>
-      <th>ReportsTo</th>
-      <th>PhotoPath</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Davolio</td>
-      <td>Nancy</td>
-      <td>Sales Representative</td>
-      <td>Ms.</td>
-      <td>1980-12-08</td>
-      <td>2024-05-01</td>
-      <td>507 - 20th Ave. E. Apt. 2A</td>
-      <td>Seattle</td>
-      <td>North America</td>
-      <td>98122</td>
-      <td>USA</td>
-      <td>(206) 555-9857</td>
-      <td>5467</td>
-      <td>None</td>
-      <td>Education includes a BA in psychology from Col...</td>
-      <td>2.0</td>
-      <td>http://accweb/emmployees/davolio.bmp</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Fuller</td>
-      <td>Andrew</td>
-      <td>Vice President, Sales</td>
-      <td>Dr.</td>
-      <td>1984-02-19</td>
-      <td>2024-08-14</td>
-      <td>908 W. Capital Way</td>
-      <td>Tacoma</td>
-      <td>North America</td>
-      <td>98401</td>
-      <td>USA</td>
-      <td>(206) 555-9482</td>
-      <td>3457</td>
-      <td>None</td>
-      <td>Andrew received his BTS commercial in 1974 and...</td>
-      <td>NaN</td>
-      <td>http://accweb/emmployees/fuller.bmp</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Leverling</td>
-      <td>Janet</td>
-      <td>Sales Representative</td>
-      <td>Ms.</td>
-      <td>1995-08-30</td>
-      <td>2024-04-01</td>
-      <td>722 Moss Bay Blvd.</td>
-      <td>Kirkland</td>
-      <td>North America</td>
-      <td>98033</td>
-      <td>USA</td>
-      <td>(206) 555-3412</td>
-      <td>3355</td>
-      <td>None</td>
-      <td>Janet has a BS degree in chemistry from Boston...</td>
-      <td>2.0</td>
-      <td>http://accweb/emmployees/leverling.bmp</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-```python
-df_employee_names = df_employee.groupby(['FirstName', 'LastName'])['FirstName', 'LastName', 'Region', 'Country', 'City', 'HireDate']
-df_employee_names.head(10)
-```
-
-
 <div>
 
 <table border="1" class="dataframe">
@@ -616,18 +440,6 @@ As seen above, Northwind has a total of 9 employees and offices in the Seattle a
 
 ### Territory, EmployeeTerritory, and Region Table Scrubbing:
 
-```python
-# Creating a new query to identify employee:territory/region pairs:
-df_employee_terr_pairs = pd.read_sql_query("""SELECT e.LastName, t.TerritoryDescription, r.RegionDescription \
-            FROM [Employee] e \
-            INNER JOIN [EmployeeTerritory] et on et.EmployeeId = e.Id \
-            INNER JOIN [Territory] t on t.Id = et.TerritoryId \
-            INNER JOIN [Region] r on r.Id = t.RegionId
-            GROUP BY e.LastName
-            ORDER BY r.RegionDescription ASC;""", engine)
-df_employee_terr_pairs.head(10)
-```
-
 <div>
 
 <table border="1" class="dataframe">
@@ -703,34 +515,6 @@ df_employee_terr_pairs.head(10)
 Based on the results of the query above, we can observe that the Eastern region is assigned the most sales team members. In our EDA, we might choose to investigate regional sales performance as a measure of average sales per employee or average monthly sales by region. Through this analysis, we could identify higher-performing regions (even if total revenue is lower) that could be ideal targets for expansion or develop data driven marketing strategies to encourage rapid growth.
 
 However, following this line of inquiry may be more productive in a future experiment, as the territories and regions are not currently clearly defined in the dataset.
-
-
-### Order, OrderDetail Table Scrubbing:
-
-```python
-df_order.ShipRegion.unique()
-```
-
-    array(['Western Europe', 'South America', 'Central America',
-           'North America', 'Northern Europe', 'Scandinavia',
-           'Southern Europe', 'British Isles', 'Eastern Europe'], dtype=object)
-
-
-By reviewing the unique values for the ShipRegion column, we can determine that ShipRegion maps to the same region descriptions from the Region table, signifying that this data can be used to review regional sales.
-
-Let's briefly review this association:
-
-
-```python
-df_region_preview = pd.read_sql_query("""SELECT o.ShipRegion, \
-            SUM(od.Quantity * od.UnitPrice * (1-od.Discount)) TotalRev \
-            FROM [OrderDetail] od \
-            INNER JOIN [Order] o on o.Id = od.OrderId \
-            GROUP BY o.ShipRegion \
-            ORDER BY TotalRev DESC""", engine)
-df_region_preview.head(10)
-```
-
   
 <div>
 
@@ -792,26 +576,6 @@ df_region_preview.head(10)
 </table>
 </div>
 
-
-
-
-```python
-# Plotting to compare regional sales totals:
-sns.set_style('whitegrid')
-sns.color_codes=True
-fig, ax = plt.subplots()
-
-sns.barplot(x=df_region_preview.ShipRegion, y=df_region_preview.TotalRev)
-
-ax.set_title('Total Revenue ($) by Region', fontsize=13, fontweight='semibold')
-ax.set_xlabel('')
-plt.xticks(rotation=45, ha='right')
-
-fig.savefig('TotalRevbyRegion.png', bbox_inches='tight')
-plt.show()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_62_0.png)
 
 
@@ -822,12 +586,7 @@ However, it should be noted that economy and cultural preference are likely fact
 
 ### Shipper, Supplier Table Scrubbing:
 
-
-```python
-# Reviewing Shipper DataFrame:
-df_shipper.head()
-```
-
+Shippers:
 <div>
 
 <table border="1" class="dataframe">
@@ -862,15 +621,7 @@ df_shipper.head()
 </table>
 </div>
 
-
-```python
-# Reviewing Supplier DataFrame
-df_supplier.head(3)
-```
-
-
-
-
+Suppliers:
 <div>
 
 <table border="1" class="dataframe">
@@ -951,40 +702,13 @@ In a future experiment, Northwind might consider adding their expenditures with 
 
 # Data Exploration/Analysis:
 
-## Do discounts have a statistically significant effect on the number of products customers order? If so, at what level(s) of discount?
+## 1. Do discounts have a statistically significant effect on the number of products customers order? If so, at what level(s) of discount?
 
-### Do discounts have a statistically significant effect on the number of products customers order?
-```
+### 1a. Do discounts have a statistically significant effect on the number of products customers order?
+
 * $H_{0}:$ Discount has no effect on the number of products ordered.
 * $H_{a}:$ Discount does have an effect on number of products ordered.
 * $\alpha$ = 0.05
-```
-
-```python
-# Visualizing Number of Orders and Average Order Size by hue DiscBool:
-fig, axes = plt.subplots(2, 1, figsize=(12,5))
-sns.set_style('whitegrid')
-
-# Grouping DataFrame for visualization:
-df_discount_basic.groupby(['DiscBool'])['Quantity'].count().plot(kind='barh', ax=axes[0], color=['#E78AC3', '#A6D854'])
-df_discount_basic.groupby(['DiscBool'])['Quantity'].mean().plot(kind='barh', ax=axes[1], color=['#E78AC3', '#A6D854'])
-
-# Subplot 1 Labels:
-axes[0].set_title('Number of Orders', fontweight='bold', fontsize=13)
-axes[0].set_xlabel('Orders', fontweight='semibold')
-axes[0].set_ylabel('')
-axes[0].set_yticklabels(['No Discount', 'Discount'], fontweight='semibold')
-
-#Subplot 2 Labels:
-axes[1].set_title('Average Order Size', fontweight='bold', fontsize=13)
-axes[1].set_xlabel('Orders', fontweight='semibold')
-axes[1].set_ylabel('')
-axes[1].set_yticklabels(['No Discount', 'Discount'], fontweight='semibold')
-fig.subplots_adjust(hspace=.75)
-
-fig.savefig('Order_numbersandsize_discbool.png', bbox_inches='tight')
-plt.show()
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_79_0.png)
@@ -995,31 +719,9 @@ As seen above, while there are less orders made for discounted items, the averag
 *Note: This initial inquiry does not factor in item price or discount level.*
 
 
-```python
-# Visualizing Distribution of orders with/without discounts:
-sns.set(rc={'figure.figsize':(10,5)})
-sns.set_style('whitegrid')
-
-ax = sns.distplot(df_discount_bool.Quantity, label='Discount', color='#E78AC3')
-ax = sns.distplot(df_nodiscount_bool.Quantity, label='No Discount', color='#A6D854')
-ax = sns.kdeplot(discount_KDE, label='Discount KDE')
-ax = sns.kdeplot(no_discount_KDE, label='No Discount KDE')
-ax.set_xlim(-15, 145)
-ax.set_title('Distribution of Order Quantity', fontsize=14, fontweight='bold')
-ax.legend(loc=1, fontsize='medium');
-```
-
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_86_0.png)
 
-
-
-```python
-# Investigating Distribution:
-stats.probplot(df_discount_bool.Quantity, plot = plt), 
-stats.probplot(df_nodiscount_bool.Quantity, plot = plt),
-plt.show()
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_87_0.png)
@@ -1029,9 +731,6 @@ plt.show()
 ```python
 variance_ratio(a=df_discount_bool.Quantity, b=df_nodiscount_bool.Quantity)
 ```
-
-
-
 
     1.4001218425014454
 
@@ -1046,14 +745,11 @@ Because the variables are independent, distributed normally, but do not show hom
 stats.ttest_ind(df_discount_bool.Quantity, df_nodiscount_bool.Quantity, equal_var=False)
 ```
 
-
-
-
     Ttest_indResult(statistic=6.511219067380875, pvalue=1.0051255540843165e-10)
 
 
 
-#### Do discounts have a statistically significant effect on the number of products customers order?
+#### 1a. Do discounts have a statistically significant effect on the number of products customers order?
 ```
 * $H_{0}:$ Discount has no effect on the number of products ordered.
 * $H_{a}:$ Discount does have an effect on number of products ordered.
@@ -1068,57 +764,18 @@ p < 0.05
 
 The resulting p-value is less than our alpha value of 0.05. Therefore, we reject the null hypothesis that there is no difference between average order size for orders with and without discounts. Since we've confirmed that discounts do have a statistically significant effect on the number of products customers order, we can explore the difference in effect at each level of discount.
 
-### If so, at what level(s) of discount?
-```
+### 1b. If so, at what level(s) of discount?
+
 * $H_{0}:$ The average number of products ordered by customers is the same regardless of discount level.
 <br>
 * $H_{a}:$ The average number of products ordered by customers is not the same as discount level changes.
 <br>
 * $\alpha$ = 0.05
-```
-
-```python
-fig, axes = plt.subplots(2, 1, figsize=(12,5))
-sns.set_style('whitegrid')
-
-# Grouping DataFrame for visualization:
-df_discount_basic.groupby(['Discount'])['Quantity'].count().plot(kind='barh', ax=axes[0], \
-                                    color=['#E78AC3', '#A6D854', '#FFD92F', '#E5C494', '#B3B3B3', '#66C2A5'])
-df_discount_basic.groupby(['Discount'])['Quantity'].mean().plot(kind='barh', ax=axes[1], \
-                                    color=['#E78AC3', '#A6D854', '#FFD92F', '#E5C494', '#B3B3B3', '#66C2A5'])
-
-# Subplot 1 Labels:
-axes[0].set_title('Number of Orders per Discount Level', fontweight='bold', fontsize=13)
-axes[0].set_xlabel('Orders', fontweight='semibold')
-axes[0].set_ylabel('')
-axes[0].set_yticklabels(['No Discount', '0.05', '0.10', '0.15', '0.20', '0.25'], fontweight='semibold')
-
-# Subplot 2 Labels:
-axes[1].set_title('Average Order Size per Discount Level', fontweight='bold', fontsize=13)
-axes[1].set_xlabel('Orders', fontweight='semibold')
-axes[1].set_ylabel('')
-axes[1].set_yticklabels(['No Discount', '0.05', '0.10', '0.15', '0.20', '0.25'], fontweight='semibold')
-fig.subplots_adjust(hspace=.75);
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_94_0.png)
 
 
-
-```python
-sns.set(rc={'figure.figsize':(10,6)})
-sns.set_style('whitegrid')
-
-ax = sns.boxenplot(data=df_discount_basic, x=df_discount_basic.Discount, y=df_discount_basic.Quantity, \
-                   hue=df_discount_basic.Discount, palette='Set2')
-ax = sns.swarmplot(data=df_discount_basic, x=df_discount_basic.Discount, y=df_discount_basic.Quantity, \
-                   hue=df_discount_basic.Discount, palette='Set2', alpha=.45)
-
-ax.set_title('Discount vs. Order Quantity', fontsize=14, fontweight='bold')
-ax.set_ylim(0)
-ax.legend(loc=1, fontsize='small', ncol=2);
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_95_0.png)
@@ -1155,14 +812,14 @@ print(tk)
     ---------------------------------------------
 
 
-#### If so, at what level(s) of discount?
-```
+#### 1b. If so, at what level(s) of discount?
+
 * $H_{0}:$ The number of products ordered by customers is the same regardless of discount level.
 <br>
 * $H_{a}:$ The number of products ordered by customers is not the same as discount level changes. 
 <br>
 * $\alpha$ = 0.05
-```
+
 
 Reviewing the results of the Tukey test, we fail to reject the null hypothesis that there is a significant difference between the control group (no discount) and the experimental group discount level 0.10. 
 
@@ -1180,26 +837,15 @@ Great! We can safely advise our client that customers order more products when a
 
 Essentially, we need to determine whether or not customers spend more when discounts are present and whether additional spend exists to offset the loss in potential revenue due to discounts. For example, if there is no statistically significant difference in customer spend regardless of whether a 5% or 25% discount is offered, we would likely advise the client to reduce the discount level of most items to 5%.
 
-## Do discounts have a statistically significant effect on customer spend per order? If so, at what level(s) of discount?
+## 2. Do discounts have a statistically significant effect on customer spend per order? If so, at what level(s) of discount?
 
-### Do discounts have a statistically significant effect on customer spend?
-```
+### 2a. Do discounts have a statistically significant effect on customer spend?
+
 * $H_{0}:$ Discounts do not have a statistically significant effect customer spend.
 <br>
 * $H_{a}:$ Discounts do have a statistically significant effect (whether positive or negative) on customer spend.
 <br>
 * $\alpha$ = 0.05
-```
-
-```python
-df_discount_spend = pd.read_sql_query("""SELECT od.OrderId, od.UnitPrice, od.Discount, od.Quantity, \
-                    od.Quantity * od.UnitPrice * (1-od.Discount) OrderPrice \
-                    FROM [OrderDetail] od \
-                    INNER JOIN Product p on od.ProductId = p.ID
-                    GROUP BY od.OrderId;""", engine)
-print(len(df_discount_spend))
-df_discount_spend.head(3)
-```
 
 <div>
 
@@ -1244,32 +890,6 @@ df_discount_spend.head(3)
 </div>
 
 
-```python
-# Visualizing Order Price by hue DiscBool:
-sns.set_style('whitegrid')
-fig, axes = plt.subplots(2, 1, figsize=(12,5))
-
-# Grouping DataFrame for visualization:
-df_discount_spend.groupby(['DiscBool'])['OrderPrice'].sum().plot(kind='barh', ax=axes[0], color=['#E78AC3', '#A6D854'])
-df_discount_spend.groupby(['DiscBool'])['OrderPrice'].mean().plot(kind='barh', ax=axes[1], color=['#E78AC3', '#A6D854'])
-
-# Subplot 1 Labels:
-axes[0].set_title('Total Order Revenue', fontweight='bold', fontsize=13)
-axes[0].set_xlabel('Revenue ($)', fontweight='semibold')
-axes[0].set_ylabel('')
-axes[0].set_yticklabels(['No Discount', 'Discount'])
-
-#Subplot 2 Labels:
-axes[1].set_title('Average Order Cost', fontweight='bold', fontsize=13)
-axes[1].set_xlabel('Revenue ($)', fontweight='semibold')
-axes[1].set_ylabel('')
-axes[1].set_yticklabels(['No Discount', 'Discount'])
-fig.subplots_adjust(hspace=.75)
-
-fig.savefig('Avg_and_tot_order_rev.png', bbox_inches='tight')
-plt.show()
-```
-
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_110_0.png)
 
@@ -1277,54 +897,8 @@ plt.show()
 Based on the visualization above, we can determine that Northwind generates more total revenue from sales of non-discounted items. However, the average order cost for orders containing discounts is greater than those without discounts. To determine whether this difference is statistically significant, we should first review the distribution of Order Price for orders with and without discount(s).
 
 
-```python
-# Visualizing order price frequency by hue Discount:
-sns.set_style('whitegrid')
-fig, ax = plt.subplots(figsize=(7,10.5))
-
-# Plotting boxenplot and swarm plot on the same axis:
-ax = sns.boxenplot(data=df_discount_spend, x=df_discount_spend.DiscBool, y=df_discount_spend.OrderPrice, palette='Set2')
-ax = sns.swarmplot(data=df_discount_spend, x=df_discount_spend.DiscBool, y=df_discount_spend.OrderPrice, hue=df_discount_spend.Discount, palette='Set2', alpha=.75)
-
-# Labeling:
-ax.set_title('Discount vs. Order Revenue', fontsize=14, fontweight='bold')
-ax.set_ylabel('Order Price', fontweight='semibold')
-ax.set_ylim(0, 5500)
-ax.set_xlabel('')
-ax.set_xticklabels(['No Discount', 'Discount'], fontweight='semibold')
-
-fig.savefig('DiscountvsOrderRevBoxen.png', bbox_inches='tight')
-plt.show()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_117_0.png)
 
-
-
-```python
-# Visualizing Distribution of Order Price with/without discounts:
-sns.set_style('whitegrid')
-fig, ax = plt.subplots(figsize=(8,5))
-
-# Plotting the distribution in order price with/without a discount:
-ax = sns.distplot(df_discount_spend_disc.OrderPrice, label='Discount', color='#E78AC3', bins=100,
-                 hist_kws={"linewidth": 2, "alpha": .6})
-ax = sns.distplot(df_discount_spend_nodisc.OrderPrice, label='No Discount', color='#A6D854', bins=100,
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-# Plotting vlines for sample means:
-plt.axvline(np.mean(df_discount_spend_nodisc.OrderPrice), color='#E78AC3', label='Discount Mean')
-plt.axvline(np.mean(df_discount_spend_disc.OrderPrice), color='#A6D854', label='No Discount Mean')
-
-
-# Labeling/Formatting:
-ax.set_xlim(-2, 4500)
-#ax.set_ylim(0, .00005)
-ax.set_title('Distribution of Order Revenue', fontsize=14, fontweight='bold')
-ax.set_xlabel('Order Revenue', fontweight='semibold')
-ax.legend(loc=1, fontsize='medium');
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_118_0.png)
@@ -1333,51 +907,7 @@ ax.legend(loc=1, fontsize='medium');
 The visualization of Distribution of Order Revenue is positively skewed. Before determining the test we'll use to test our hypothesis, let's first visualize and compare the shapes of the distributions above in separate plots.
 
 
-```python
-# Visualizing Distribution of Order Price with/without discounts:
-sns.set_style('whitegrid')
-fig, axes = plt.subplots(1,2, figsize=(12,5))
-
-# Plotting the same distributions above on separate axes:
-sns.distplot(df_discount_spend_disc.OrderPrice, label='Discount', color='#E78AC3', bins=120, ax=axes[0], 
-                 hist_kws={"linewidth": 2, "alpha": .6})
-sns.distplot(df_discount_spend_nodisc.OrderPrice, label='No Discount', color='#A6D854', bins=200, 
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-# Subplot 1 Labels:
-axes[0].set_title('Distribution of Order Revenue (Discount)', fontweight='bold', fontsize=13)
-axes[0].set_xlabel('Revenue ($)', fontweight='semibold')
-axes[0].set_ylabel('')
-axes[0].set_xlim(-2, 3500)
-
-#Subplot 2 Labels:
-axes[1].set_title('Distribution of Order Revenue (No Discount)', fontweight='bold', fontsize=13)
-axes[1].set_xlabel('Revenue ($)', fontweight='semibold')
-axes[1].set_ylabel('')
-axes[1].set_xlim(-2, 3500)
-
-fig.subplots_adjust(wspace=.22)
-
-fig.savefig('OrderRev_Distribution_hist_bool.png', bbox_inches='tight')
-plt.show()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_120_0.png)
-
-
-
-```python
-# Visualizing Distribution:
-fig, ax = plt.subplots()
-
-stats.probplot(df_discount_spend_disc.OrderPrice, plot = plt), 
-stats.probplot(df_discount_spend_nodisc.OrderPrice, plot = plt),
-
-ax.set_title('QQ Plot - Order Revenue Distribution', fontsize=13, fontweight='semibold')
-
-plt.show()
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_121_0.png)
@@ -1386,54 +916,11 @@ plt.show()
 A visual examination of the distribution of Order Revenue suggests that we should transform the data to fit a normal distribution before modeling and hypothesis testing.
 
 
-```python
-# Repeating the visualizations above using new column 'LogOrderPrice':
-sns.set_style('whitegrid')
-fig, axes = plt.subplots(1,2, figsize=(12,5), sharey=False)
-
-sns.distplot(df_log_discount_spend_disc.LogOrderPrice, label='Discount', color='#E78AC3', bins=30, ax=axes[0], 
-                 hist_kws={"linewidth": 2, "alpha": .6})
-sns.distplot(df_log_discount_spend_nodisc.LogOrderPrice, label='No Discount', color='#A6D854', bins=30, ax=axes[1], 
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-# Subplot 1 Labels:
-axes[0].set_title('Order Revenue (Discount)', fontweight='bold', fontsize=13)
-axes[0].set_xlabel('Log Revenue', fontweight='semibold')
-axes[0].set_ylabel('')
-#axes[0].set_xlim(-1000, 30000)
-
-#Subplot 2 Labels:
-axes[1].set_title('Order Revenue (No Discount)', fontweight='bold', fontsize=13)
-axes[1].set_xlabel('Log Revenue', fontweight='semibold')
-axes[1].set_ylabel('')
-#axes[1].set_xlim(-1000, 30000)
-fig.subplots_adjust(wspace=.13)
-
-fig.savefig('Log_OrderRev_Distribution_hist_bool.png', bbox_inches='tight')
-plt.show()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_128_0.png)
 
 
 
-```python
-# Investigating Normality:
-fig,ax = plt.subplots()
-
-stats.probplot(df_log_discount_spend_disc.LogOrderPrice, plot = plt), 
-stats.probplot(df_log_discount_spend_nodisc.LogOrderPrice, plot = plt),
-ax.set_title('QQ Plot - Log-Scaled Order Revenue Distribution', fontsize=13, fontweight='semibold')
-
-fig.savefig('QQ Plot - Log-Scaled Order Revenue Distribution.png', bbox_inches='tight')
-
-plt.show()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_129_0.png)
-
 
 
 ```python
@@ -1447,7 +934,6 @@ variance_ratio(a=df_log_discount_spend_disc.LogOrderPrice, b=df_log_discount_spe
     1.0836127695528326
 
 
-
 Great! Log transforming Order Revenue has normalized the data for both distributions. As our variables are independent, distributions of our variables is normal, and the variances are at an acceptable level of homogeneity, we can determine whether the presence of a discount has a statistically significant effect on Order Price using an independent two-tailed t-test.
 
 
@@ -1455,99 +941,37 @@ Great! Log transforming Order Revenue has normalized the data for both distribut
 # Using a two-tailed t-test to compare distributions above:
 stats.ttest_ind(df_log_discount_spend_disc.LogOrderPrice, df_log_discount_spend_nodisc.LogOrderPrice)
 ```
-
-
-
-
     Ttest_indResult(statistic=1.829039466630245, pvalue=0.06775322267188763)
 
 
+#### 2a. Do discounts have a statistically significant effect on average customer spend (order price)?
 
-#### Do discounts have a statistically significant effect on average customer spend (order price)?
 
-```
 * $H_{0}:$ Discounts do not have a statistically significant effect on average customer spend.
 <br>
 * $H_{a}:$ Discounts do have a statistically significant effect (whether positive or negative) on average customer spend.
 <br>
 * $\alpha$ = 0.05
-```
+
 
 The resulting p-value of our two-tailed t-test is 0.07.
 
 Because p > 0.05 we fail to reject the null hypothesis that states that discount (as a boolean) does not have a statistically significant effect on customer spend.
 
-### At what level(s) of discount is there a significant effect on average customer spend?
-```
+### 2b. At what level(s) of discount is there a significant effect on average customer spend?
+
 * $H_{0}:$ Customer order price is the same regardless of discount level.
 <br>
 * $H_{a}:$ Customer order price is not the same as discount level changes.
 <br>
 * $\alpha$ = 0.05
-```
-
-```python
-# Visualizing Order Prices by hue Discount Level:
-sns.set_style('whitegrid')
-fig, ax = plt.subplots(figsize=(10,6))
-
-ax = sns.boxenplot(data=df_log_discount_spend, x=df_discount_spend.Discount, y=df_discount_spend.OrderPrice, palette='Set2')
-ax = sns.swarmplot(data=df_log_discount_spend, x=df_discount_spend.Discount, y=df_discount_spend.OrderPrice, hue=df_discount_spend.Discount, palette='Set2', alpha=.75)
-
-ax.set_title('Discount Level vs. Order Revenue', fontsize=14, fontweight='bold')
-ax.set_ylabel('Order Price', fontweight='semibold')
-ax.set_ylim(0,6250)
-ax.set_xlabel('Discount Level')
-ax.set_xticklabels(['No Discount', '0.05', '0.10', '0.15', '0.20', '0.25'], fontweight='semibold')
-ax.legend(loc=1, fontsize='medium');
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_136_0.png)
 
 
 
-```python
-# Visualizing Distribution of Order Price with/without discounts:
-sns.set_style('whitegrid')
-fig, ax = plt.subplots(figsize=(10,6))
-
-# Plotting Overlapping distplots for each discount level:
-ax = sns.distplot(df_log_ds_nodisc.LogOrderPrice, label='No Discount', color='#E78AC3', bins=30,
-                 hist_kws={"linewidth": 2, "alpha":.4})
-ax = sns.distplot(df_log_ds_5p.LogOrderPrice, label='5% Discount', color='#A6D854', bins=30,
-                  hist_kws={"linewidth": 2, "alpha": .4})
-ax = sns.distplot(df_log_ds_10p.LogOrderPrice, label='10% Discount', color='#FFD92F', bins=30,
-                  hist_kws={"linewidth": 2, "alpha": .4})
-ax = sns.distplot(df_log_ds_15p.LogOrderPrice, label='15% Discount', color='#E5C494', bins=30,
-                  hist_kws={"linewidth": 2, "alpha": .4})
-ax = sns.distplot(df_log_ds_20p.LogOrderPrice, label='20% Discount', color='#B3B3B3', bins=30,
-                  hist_kws={"linewidth": 2, "alpha": .4})
-ax = sns.distplot(df_log_ds_25p.LogOrderPrice, label='25% Discount', color='#66C2A5', bins=30,
-                  hist_kws={"linewidth": 2, "alpha": .4})
-
-# Adding labels/legend:
-ax.set_xlabel('Log Order Price', fontweight='semibold')
-ax.set_title('Distribution of Order Price by Discount', fontsize=14, fontweight='bold')
-fig.subplots_adjust(top=.85, bottom=.15);
-ax.legend(loc=1, fontsize='medium');
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_139_0.png)
-
-
-
-```python
-# Investigating Normality:
-stats.probplot(df_log_ds_nodisc.LogOrderPrice, plot = plt), 
-stats.probplot(df_log_ds_5p.LogOrderPrice, plot = plt),
-stats.probplot(df_log_ds_10p.LogOrderPrice, plot = plt),
-stats.probplot(df_log_ds_15p.LogOrderPrice, plot = plt),
-stats.probplot(df_log_ds_20p.LogOrderPrice, plot = plt),
-stats.probplot(df_log_ds_25p.LogOrderPrice, plot = plt)
-plt.show()
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_140_0.png)
@@ -1560,8 +984,6 @@ Distribution of Order price appears normal across each discount level. We can no
 # Printing OLS Regression Results:
 lm.summary()
 ```
-
-
 
 
 <table class="simpletable">
@@ -1630,9 +1052,7 @@ lm.summary()
 <tr>
   <th>Kurtosis:</th>      <td> 3.035</td> <th>  Cond. No.          </th> <td>    4.79</td>
 </tr>
-</table><br/><br/>Warnings:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-
-
+</table><br/><br/>
 
 
 ```python
@@ -1641,22 +1061,8 @@ sm.stats.anova_lm(lm, typ=2)
 ```
 
 
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1717,25 +1123,17 @@ print(tk2)
 
 
 
-## Do discounts have a statistically significant effect on Order Quantity by Category? If so, at what level(s) of discount?
+## 3. Do discounts have a statistically significant effect on Order Quantity by Category? If so, at what level(s) of discount?
 *Note:  Product categories include 'Beverages', 'Condiments', 'Confections', 'Dairy Products', 'Grains/Cereals', 'Meat/Poultry', 'Produce', and 'Seafood'. 
 
-### Do discounts have a statistically significant effect on the number of products customers order by category?
-```
+### 3a. Do discounts have a statistically significant effect on the number of products customers order by category?
+
 * $H_{0}:$ Discounts do not have a statistically significant effect on number of products customers order by category.
 <br>
 * $H_{a}:$ Discounts either increase or decrease the number of products customers order by category.
 <br>
 * $\alpha$ = 0.05
-```
 
-```python
-df_discount_category_spend = pd.read_sql_query("""SELECT p.Id, c.CategoryName, p.ProductName, od.Discount, od.Quantity, p.QuantityPerUnit \
-            FROM [Product] p \
-            INNER JOIN [OrderDetail] od on od.ProductId = p.Id
-            INNER JOIN [Category] c on c.Id = p.CategoryId""", engine)
-df_discount_category_spend.head(3)
-```
 
 <div>
 
@@ -1784,56 +1182,12 @@ df_discount_category_spend.head(3)
 </div>
 
 
-```python
-# Visualizing Distribution of Order Quantity for each Category Name:
-sns.set_style('whitegrid')
-fig, ax = plt.subplots(figsize=(10,7.5))
-
-# Plotting boxenplot and swarm plot on the same axis:
-ax = sns.boxenplot(data=df_discount_category_spend, x=df_discount_category_spend.CategoryName, y=df_discount_category_spend.Quantity, palette='Set2')
-ax = sns.swarmplot(data=df_discount_category_spend, x=df_discount_category_spend.CategoryName, y=df_discount_category_spend.Quantity, hue=df_discount_category_spend.DiscBool, palette='Set2', alpha=.75)
-
-# Labeling:
-ax.set_title('Discount vs. Order Quantity', fontsize=14, fontweight='bold')
-ax.set_ylabel('Order Quantity', fontweight='semibold')
-ax.set_ylim(0)
-ax.set_xlabel('')
-
-fig.savefig('DiscVsOrderQuant.png', bbox_inches='tight')
-
-plt.xticks(rotation=45, ha='right')
-plt.show()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_159_0.png)
 
 
-
-```python
-# Visualizing Distribution of Product Order Size with/without discounts:
-sns.set_style('whitegrid')
-
-# Plotting distributions:
-ax = sns.distplot(df_discount_category_spend_disc.Quantity, label='Discount', color='#E78AC3')
-ax = sns.distplot(df_discount_category_spend_nodisc.Quantity, label='No Discount', color='#A6D854')
-
-# Label/Format:
-ax.set_xlim(-2)
-ax.set_title('Distribution of Order Quantity', fontsize=14, fontweight='bold')
-ax.legend(loc=1, fontsize='medium');
-```
-
+Comparing with/without discounts applied:
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_160_0.png)
-
-
-
-```python
-stats.probplot(df_discount_category_spend_disc.Quantity, plot = plt),
-stats.probplot(df_discount_category_spend_nodisc.Quantity, plot = plt),
-plt.show()
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_161_0.png)
@@ -1842,35 +1196,6 @@ plt.show()
 Because we're seeking to determine whether the means of two independent groups are significantly different, we'd like to conduct an Independent two tailed t-test.  However, we must first ensure that the populations meet the assumptions of normality and homogeneity of variance required. 
 
 As seen above, the distribution for Order Quantities with and without a Discount are positively skewed. In order to conduct a two-tailed t-test, we should first normalize both distributions.
-
-
-```python
-# Visualizing Number of Orders and Log Number of Orders by DiscBool:
-sns.set_style('whitegrid')
-fig, axes = plt.subplots(1, 2, figsize=(12,6))
-ax.legend()
-
-# Subplot 1:
-df_discount_category_spend.groupby(['CategoryName', 'DiscBool'])['Quantity'].hist(ax=axes[0], alpha=.25)
-#df_discount_category_spend_nodisc.groupby(['CategoryName'])['Quantity'].sum().plot(kind='barh', ax=axes[0], alpha=.3, color=['blue'])
-
-# Subplot 2:
-df_log_discount_category_spend.groupby(['CategoryName', 'DiscBool'])['LogOrderQuantity'].hist(ax=axes[1], alpha=.25)
-#df_discount_category_spend_nodisc.groupby(['CategoryName'])['Quantity'].mean().plot(kind='barh', ax=axes[1], alpha=.3, color=['blue'])
-
-# Subplot 1 Labels:
-axes[0].set_title('Order Quantity Distribution', fontweight='bold', fontsize=13)
-axes[0].set_xlabel('Order Quantity', fontweight='semibold')
-axes[0].set_ylabel('')
-#axes[0].set_yticklabels(['No Discount', 'Discount'])
-
-#Subplot 2 Labels:
-axes[1].set_title('Log Order Quantity Distribution', fontweight='bold', fontsize=13)
-axes[1].set_xlabel('Log Order Quantity', fontweight='semibold')
-axes[1].set_ylabel('')
-#axes[1].set_yticklabels(['No Discount', 'Discount'])
-fig.subplots_adjust(hspace=.35);
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_164_0.png)
@@ -1882,19 +1207,7 @@ As seen above, log scaling the values for Order Quantity increased the distribut
 variance_ratio(a=df_log_discount_category_spend_disc.LogOrderQuantity, b=df_log_discount_category_spend_nodisc.LogOrderQuantity)
 ```
 
-
-
-
     0.9030998215987438
-
-
-
-
-```python
-stats.probplot(df_log_discount_category_spend_disc.LogOrderQuantity, plot = plt),
-stats.probplot(df_log_discount_category_spend_nodisc.LogOrderQuantity, plot = plt),
-plt.show()
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_168_0.png)
@@ -1907,135 +1220,12 @@ Great! With confirmation of normal distribution and homogeneity of variance in e
 # Using a two-tailed t-test to compare distributions above:
 stats.ttest_ind(df_log_discount_category_spend_disc.LogOrderQuantity, df_log_discount_category_spend_nodisc.LogOrderQuantity)
 ```
-
-
-
-
     Ttest_indResult(statistic=6.920700463008245, pvalue=5.91313388186685e-12)
-
-
 
 Because p < 0.05, we reject the null hypothesis that there is no significant difference in Order quantity for orders with and without a discount.
 
 
-```python
-# Visualizing Distribution of Product Order Size with/without discounts:
-sns.set_style('whitegrid')
-
-# Creating Gridspec:
-plt.figure(figsize=(10,10))
-ax1 = plt.subplot2grid((4, 2), (0, 0))
-ax2 = plt.subplot2grid((4, 2), (1, 0))
-ax3 = plt.subplot2grid((4, 2), (2, 0))
-ax4 = plt.subplot2grid((4, 2), (3, 0))
-ax5 = plt.subplot2grid((4, 2), (0, 1))
-ax6 = plt.subplot2grid((4, 2), (1, 1))
-ax7 = plt.subplot2grid((4, 2), (2, 1))
-ax8 = plt.subplot2grid((4, 2), (3, 1))
-
-        
-
-# Subplot 1:
-ax1.hist(df_discount_category_spend_dairy_disc.Quantity, label='Discount', color='#E78AC3', alpha=.5, bins=30, density=True)
-ax1.hist(df_discount_category_spend_dairy_nodisc.Quantity, label='No Discount', color='#A6D854', alpha=.5, bins=30, density=True)
-ax1.set_title('Distribution of Order Quantity: Dairy', fontweight='bold')
-#axes[0,0].legend(loc=1, fontsize='medium');
-
-# Subplot 2:
-ax2.hist(df_discount_category_spend_grain_disc.Quantity, label='Discount', color='#E78AC3', alpha=.5, bins=30, density=True)
-ax2.hist(df_discount_category_spend_grain_nodisc.Quantity, label='No Discount', color='#A6D854', alpha=.5, bins=30, density=True)
-ax2.set_title("Distribution of Order Quantity: Grains", fontsize=12, fontweight='bold')
-
-# Subplot 3:
-ax3.hist(df_discount_category_spend_produce_disc.Quantity, label='Discount', color='#E78AC3', alpha=.5, bins=30, density=True)
-ax3.hist(df_discount_category_spend_produce_nodisc.Quantity, label='No Discount', color='#A6D854', alpha=.5, bins=30, density=True)
-ax3.set_title("Distribution of Order Quantity: Produce", fontsize=12, fontweight='bold')
-
-# Subplot 4:
-ax4.hist(df_discount_category_spend_seafood_disc.Quantity, label='Discount', color='#E78AC3', alpha=.5, bins=30, density=True)
-ax4.hist(df_discount_category_spend_seafood_nodisc.Quantity, label='No Discount', color='#A6D854', alpha=.5, bins=30, density=True)
-ax4.set_title("Distribution of Order Quantity: Seafood", fontsize=12, fontweight='bold')
-
-# Subplot 5:
-ax5.hist(df_discount_category_spend_condiments_disc.Quantity, label='Discount', color='#E78AC3', alpha=.5, bins=30, density=True)
-ax5.hist(df_discount_category_spend_condiments_nodisc.Quantity, label='No Discount', color='#A6D854', alpha=.5, bins=30, density=True)
-ax5.set_title("Distribution of Order Quantity: Condiments", fontsize=12, fontweight='bold')
-
-# Subplot 6:
-ax6.hist(df_discount_category_spend_confections_disc.Quantity, label='Discount', color='#E78AC3', alpha=.5, bins=30, density=True)
-ax6.hist(df_discount_category_spend_confections_nodisc.Quantity, label='No Discount', color='#A6D854', alpha=.5, bins=30, density=True)
-ax6.set_title("Distribution of Order Quantity: Confections", fontsize=12, fontweight='bold')
-
-# Subplot 7:
-ax7.hist(df_discount_category_spend_bev_disc.Quantity, label='Discount', color='#E78AC3', alpha=.5, bins=30, density=True)
-ax7.hist(df_discount_category_spend_bev_nodisc.Quantity, label='No Discount', color='#A6D854', alpha=.5, bins=30, density=True)
-ax7.set_title("Distribution of Order Quantity: Beverages", fontsize=12, fontweight='bold')
-
-# Subplot 8:
-ax8.hist(df_discount_category_spend_meat_disc.Quantity, label='Discount', color='#E78AC3', alpha=.5, bins=30, density=True)
-ax8.hist(df_discount_category_spend_meat_nodisc.Quantity, label='No Discount', color='#A6D854', alpha=.5, bins=30, density=True)
-ax8.set_title("Distribution of Order Quantity: Meat/Poultry", fontsize=12, fontweight='bold')
-plt.tight_layout()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_174_0.png)
-
-
-
-```python
-# Visualizing Distribution of Order Quantity with/without discounts:
-sns.set_style('whitegrid')
-fig, ax = plt.subplots(figsize=(10,5))
-
-# Plotting the distribution in order quantity with/without a discount:
-ax = sns.distplot(df_discount_category_spend_dairy_disc.Quantity, label='Dairy Discount', color='#E78AC3', bins=150,
-                 hist_kws={"linewidth": 2, "alpha": .6})
-ax = sns.distplot(df_discount_category_spend_dairy_nodisc.Quantity, label='Dairy No Discount', color='#A6D854', bins=150,
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-ax = sns.distplot(df_discount_category_spend_grain_disc.Quantity, label='Grains Discount', color='#E78AC3', bins=150,
-                 hist_kws={"linewidth": 2, "alpha": .6})
-ax = sns.distplot(df_discount_category_spend_grain_nodisc.Quantity, label='Grains No Discount', color='#A6D854', bins=150,
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-ax = sns.distplot(df_discount_category_spend_produce_disc.Quantity, label='Produce Discount', color='#E78AC3', bins=150,
-                 hist_kws={"linewidth": 2, "alpha": .6})
-ax = sns.distplot(df_discount_category_spend_produce_nodisc.Quantity, label='Produce No Discount', color='#A6D854', bins=150,
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-ax = sns.distplot(df_discount_category_spend_seafood_disc.Quantity, label='Seafood Discount', color='#E78AC3', bins=150,
-                 hist_kws={"linewidth": 2, "alpha": .6})
-ax = sns.distplot(df_discount_category_spend_seafood_nodisc.Quantity, label='Seafood No Discount', color='#A6D854', bins=150,
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-ax = sns.distplot(df_discount_category_spend_condiments_disc.Quantity, label='Condiments Discount', color='#E78AC3', bins=150,
-                 hist_kws={"linewidth": 2, "alpha": .6})
-ax = sns.distplot(df_discount_category_spend_condiments_nodisc.Quantity, label='Condiments No Discount', color='#A6D854', bins=150,
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-ax = sns.distplot(df_discount_category_spend_confections_disc.Quantity, label='Confections Discount', color='#E78AC3', bins=150,
-                 hist_kws={"linewidth": 2, "alpha": .6})
-ax = sns.distplot(df_discount_category_spend_confections_nodisc.Quantity, label='Confections No Discount', color='#A6D854', bins=150,
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-ax = sns.distplot(df_discount_category_spend_bev_disc.Quantity, label='Beverages Discount', color='#E78AC3', bins=150,
-                 hist_kws={"linewidth": 2, "alpha": .6})
-ax = sns.distplot(df_discount_category_spend_bev_nodisc.Quantity, label='Beverages No Discount', color='#A6D854', bins=150,
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-ax = sns.distplot(df_discount_category_spend_meat_disc.Quantity, label='Meat/Poultry Discount', color='#E78AC3', bins=150,
-                 hist_kws={"linewidth": 2, "alpha": .6})
-ax = sns.distplot(df_discount_category_spend_meat_nodisc.Quantity, label='Meat/Poultry No Discount', color='#A6D854', bins=150,
-                  hist_kws={"linewidth": 2, "alpha": .3})
-
-# Labeling/Formatting:
-ax.set_xlim(-10, 65)
-ax.set_ylim(0, .26)
-ax.set_title('Distribution of Order Quantity by Category', fontsize=14, fontweight='bold')
-ax.set_xlabel('Order Quantity')
-ax.legend(loc=(1.05,.5), fontsize='medium', ncol=2);
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_175_0.png)
@@ -2082,32 +1272,15 @@ print(tk3)
     ------------------------------------------------------------
 
 
-## Is there a statistically significant difference in performance of Sales Employees at Northwind?
+## 4. Is there a statistically significant difference in performance of Sales Employees at Northwind?
 
-### Is total all-time revenue generated equal across all employees?
-```
+### 4a. Is total all-time revenue generated equal across all employees?
+
 * $H_{0}:$ There is no difference between all-time revenue generated across all employees.
 <br>
 * $H_{a}:$ There is a difference between all-time revenue generated across all employees.
 <br>
 * $\alpha$ = 0.05
-```
-
-```python
-df_employee_sales_overview = pd.read_sql_query("""SELECT e.Id, e.LastName, e.Title, e.HireDate, \
-            SUM(od.Quantity * od.UnitPrice * (1-od.Discount)) TotalRev\
-            FROM [OrderDetail] od \
-            INNER JOIN [Order] o on o.Id = od.OrderId \
-            INNER JOIN [Employee] e on e.Id = o.EmployeeId \
-            GROUP BY e.LastName \
-            ORDER BY e.LastName DESC""", engine)
-print(len(df_employee_sales_overview))
-df_employee_sales_overview.head(50)
-```
-    9
-
-
-
 
 
 <div>
@@ -2201,27 +1374,6 @@ df_employee_sales_overview.head(50)
 </div>
 
 
-
-
-```python
-# Plotting to compare sales totals by Employee:
-sns.set_style('whitegrid')
-sns.set_color_codes='Set2'
-
-fig, ax = plt.subplots()
-
-sns.barplot(x=df_employee_sales_overview.LastName, y=df_employee_sales_overview.TotalRev)
-
-ax.set_title('Total Revenue by Employee - All Time', fontsize=13, fontweight='semibold')
-ax.set_xlabel('')
-ax.set_ylabel('Total Revenue ($)', fontweight='semibold')
-plt.xticks(rotation=45, ha='right', fontweight='semibold')
-
-fig.savefig('TotalRevenueByEmp.png', bbox_inches='tight')
-plt.show()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_184_0.png)
 
 
@@ -2230,58 +1382,15 @@ Ranking the employees in the Sales Team by revenue generated (TotalRev) is only 
 For this reason, it's likely more productive to view differences in 2014 YTD revenue generated for each employee and YoY revenue generated by Northwind as a whole. Also worth mentioning is that there are 3 basic "levels" of employee seniority (Sales Rep, Manager, VP) included. Because we do not have information regarding employee salary as well as other KPIs these employees may be accountable for, a direct comparison of revenue generated is likely not fully representitive of employee performance. 
 
 
-```python
-fig, ax = plt.subplots(figsize=(6.5,10))
-sns.set_style('whitegrid')
-sns.set_palette('Set2')
-
-df_employee_sales.groupby('LastName')['TotalRev'].plot(kind='hist', alpha=.25, bins=30, ax=ax, density=True)
-
-ax.set_title('Distribution in Order Revenue by Employee')
-ax.set_xlabel('Order Revenue')
-ax.set_xlim(-2, 4000)
-ax.legend(ncol=1, fontsize='small');
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_187_0.png)
 
-
-
-```python
-# Visualizing Distribution:
-stats.probplot(df_employee_sales.TotalRev, plot = plt),
-plt.show()
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_188_0.png)
 
 
 
-```python
-fig, ax = plt.subplots(figsize=(6.5,10))
-sns.set_style('whitegrid')
-sns.set_palette('Set2')
-
-df_log_employee_sales.groupby('LastName')['LogTotalRev'].plot(kind='hist', alpha=.25, bins=30, ax=ax, density=True)
-
-#ax.set_xticklabels(df_log_employee_sales.LastName)
-ax.set_xlabel('Log Order Price')
-ax.legend(ncol=1, fontsize='small');
-#plt.xticks(rotation=90);
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_192_0.png)
-
-
-
-```python
-# Visualizing Distribution:
-stats.probplot(df_log_employee_sales.LogTotalRev, plot = plt),
-plt.show()
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_193_0.png)
@@ -2336,42 +1445,26 @@ print(tk4)
     --------------------------------------------------
 
 
-### Is total all-time revenue generated equal across all employees?
-```
+### 4a. Is total all-time revenue generated equal across all employees?
+
 * $H_{0}:$ There is no difference between all-time revenue generated across all employees.
 <br>
 * $H_{a}:$ There is a difference between all-time revenue generated across all employees.
 <br>
 * $\alpha$ = 0.05
-```
+
 
 Based on the results of the Tukey Test above, we fail to reject the null hypothesis that there is a statistically significant difference between total all-time revenue generated for any 2 employees.
 
 However, we still don't have details on how long each employee has worked at Northwind. Let's repeat a similar test to determine investigate relationships between average sales per employee in 2014.
 
-### Is average Order Revenue equal across all employees in 2014?
-```
+### 4b. Is average Order Revenue equal across all employees in 2014?
+
 * $H_{0}:$ There is no difference in average Order Revenue generated across all employees in 2014.
 <br>
 * $H_{a}:$ There is a difference in average Order Revenue generated across all employees in 2014.
 <br>
 * $\alpha$ = 0.05
-```
-
-```python
-df_employee_sales_2013 = pd.read_sql_query("""SELECT e.LastName, \
-            SUM((od.Quantity * od.UnitPrice * (1-od.Discount))) OrderTotal, 
-            COUNT(od.Id) OrderCount
-            FROM [OrderDetail] od \
-            INNER JOIN [Order] o on o.Id = od.OrderId \
-            INNER JOIN [Employee] e on e.Id = o.EmployeeId
-            WHERE o.OrderDate LIKE "2013%"
-            GROUP BY e.LastName \
-            ORDER BY OrderTotal DESC;""", engine)
-
-df_employee_sales_2013.head(10)
-```
-
 
 <div>
 
@@ -2445,25 +1538,6 @@ df_employee_sales_2013.head(10)
 
 
 
-```python
-# Plotting to compare 2014 sales totals by Employee:
-sns.set_style('whitegrid')
-sns.set_color_codes='Set2'
-
-fig, ax = plt.subplots()
-
-sns.barplot(x=df_employee_sales_2014_overview.LastName, y=df_employee_sales_2014_overview.OrderTotal)
-
-ax.set_title('Total Revenue by Employee - 2014', fontsize=13, fontweight='semibold')
-ax.set_xlabel('')
-ax.set_ylabel('Total Revenue ($)', fontweight='semibold')
-plt.xticks(rotation=45, ha='right', fontweight='semibold')
-
-fig.savefig('TotalRevenueByEmp2014.png', bbox_inches='tight')
-plt.show()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_205_0.png)
 
 
@@ -2519,25 +1593,19 @@ print(tk5)
     ---------------------------------------------------------
 
 
-## YoY Revenue:
+## 5. YoY Revenue:
 
-### Is Q1 Order Revenue for 2014 significantly greater than Q1 Order Revenue from 2013?
-```
+### 5a. Is Q1 Order Revenue for 2014 significantly greater than Q1 Order Revenue from 2013?
+
 * $H_{0}:$ Average Order Revenue for Q1 2014 is not greater than that of 2013.
 <br>
 * $H_{a}:$ Average Order Revenue for Q1 2014 is greater than that of 2013.
 <br>
 * $\alpha$ = 0.05
-```
+
 
 *Note: As we're seeking to determine whether one value is greater than the other, we'll use a one-tailed test.*
 
-
-
-```python
-# Reviewing Monthly Sales in 2014
-print(max(df_revenue_2014.OrderDate)) # Checking date of last order placed
-df_revenue_2014.groupby(['Month'])['OrderPrice'].sum()
 ```
 
     2014-05-06
@@ -2549,36 +1617,11 @@ df_revenue_2014.groupby(['Month'])['OrderPrice'].sum()
     04    123798.6825
     05     18333.6305
     Name: OrderPrice, dtype: float64
-
-
+```
 
 As shown above, the last recorded sale in the dataset ocurred on 2014-05-06. Because this range represents less than than 25% of the days in the Month of May, a direct comparison of revenue between May of 2013/2014 is not possible.
 
 Instead, we'll compare the revenue from Q1 2014 with Q1 2013.
-
-
-```python
-fig, ax = plt.subplots(figsize=(8,4), sharex=False)
-sns.set_style('whitegrid')
-sns.set_palette('Set2')
-
-a = df_revenue_2013.groupby(['Month'])['OrderPrice'].sum().plot(kind='line', ax=ax, label='2013', marker='o')
-b = df_revenue_2014_q1.groupby(['Month'])['OrderPrice'].sum().plot(kind='line', ax=ax, label='2014', marker='o')
-
-ax.set_title('YoY Revenue - 2013 vs. 2014 YTD', fontsize=13, fontweight='semibold')
-ticklabels = [datetime.date(1900, month, 12).strftime('%b') for month in range(1,13)]
-ax.set_xticks(np.arange(0,12))
-ax.set_xlim(0,11)
-ax.set_xticklabels(ticklabels) #add monthlabels to the xaxis
-ax.set_xlabel('')
-ax.set_ylabel('Revenue', fontweight='semibold')
-
-ax.legend(['2013', '2014'], loc=1) #add the column names as legend.
-
-fig.savefig('YoY_Rev_2013v2014.png', bbox_inches='tight')
-
-plt.tight_layout(rect=[0, 0, 0.85, 1])
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_226_0.png)
@@ -2589,112 +1632,17 @@ As shown above, Northwind's 2014 Q1 monthly revenue is much greater than that of
 For this reason, we'll compare the average Order Revenue from each sample.
 
 
-```python
-# Visualizing Q1 Sales Data:
-sns.set_style('whitegrid')
-fig, axes = plt.subplots(2, 1, figsize=(12,5), sharex=True, sharey=False)
-
-# Grouping DataFrame for visualization:
-df_revenue_2013_q1.groupby(['Year'])['OrderPrice'].sum().plot(kind='barh', ax=axes[0], color='#E78AC3')
-df_revenue_2014_q1.groupby(['Year'])['OrderPrice'].sum().plot(kind='barh', ax=axes[1], color='#A6D854')
-
-# Subplot 1 Labels:
-axes[0].set_title('Total Order Revenue - Q1', fontweight='bold', fontsize=13)
-axes[0].set_xlabel('Revenue ($)', fontweight='semibold')
-axes[0].set_ylabel('')
-axes[0].set_yticklabels(['2013'], fontweight='semibold')
-
-#Subplot 2 Labels:
-axes[1].set_xlabel('Revenue ($)', fontweight='semibold')
-axes[1].set_ylabel('')
-axes[1].set_yticklabels(['2014'], fontweight='semibold')
-fig.subplots_adjust(hspace=0)
-
-fig.savefig('tot_order_rev_Q1.png', bbox_inches='tight')
-plt.show()
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_228_0.png)
 
-
-
-```python
-# Visualizing Q1 Sales Data:
-sns.set_style('whitegrid')
-fig, axes = plt.subplots(2, 1, figsize=(12,5), sharex=True, sharey=False)
-
-# Grouping DataFrame for visualization:
-df_revenue_2013_q1.groupby(['Year'])['OrderPrice'].mean().plot(kind='barh', ax=axes[0], color='#E78AC3')
-df_revenue_2014_q1.groupby(['Year'])['OrderPrice'].mean().plot(kind='barh', ax=axes[1], color='#A6D854')
-
-# Subplot 1 Labels:
-axes[0].set_title('Mean Order Revenue - Q1', fontweight='bold', fontsize=13)
-axes[0].set_xlabel('Revenue ($)', fontweight='semibold')
-axes[0].set_ylabel('')
-axes[0].set_yticklabels(['2013'], fontweight='semibold')
-
-#Subplot 2 Labels:
-axes[1].set_xlabel('Revenue ($)', fontweight='semibold')
-axes[1].set_ylabel('')
-axes[1].set_yticklabels(['2014'], fontweight='semibold')
-fig.subplots_adjust(hspace=0)
-
-fig.savefig('Avg_order_rev_q1.png', bbox_inches='tight')
-plt.show()
-```
-
-
+Q1 Sales Data Visualization:
 ![png](Mod%202%20Project_files/Mod%202%20Project_229_0.png)
 
 
-
-```python
-# Visualizing Distribution of Mean Q1 Order Revenue:
-sns.set_style('whitegrid')
-
-# Plotting distributions:
-ax = sns.distplot(df_revenue_2013_q1.OrderPrice, label='2013', color='#E78AC3')
-ax = sns.distplot(df_revenue_2014_q1.OrderPrice, label='2014', color='#A6D854')
-
-# Label/Format:
-ax.set_xlim(0, 4000)
-ax.set_xlabel('Order Revenue ($)', fontweight='semibold')
-ax.set_title('Distribution of Q1 Revenue Generated per Order', fontsize=14, fontweight='bold')
-ax.legend(loc=1, fontsize='medium');
-```
-
-
+Distribution of mean revenue:
 ![png](Mod%202%20Project_files/Mod%202%20Project_230_0.png)
 
 
-
-```python
-# Visualizing Distribution of Mean Q1 Order Revenue:
-sns.set_style('whitegrid')
-
-# Plotting distributions:
-ax = sns.distplot(df_log_revenue_2013_q1.LogTotalRev, label='2013', color='#E78AC3')
-ax = sns.distplot(df_log_revenue_2014_q1.LogTotalRev, label='2014', color='#A6D854')
-
-# Label/Format:
-ax.set_xlabel('Log Order Revenue ($)', fontweight='semibold')
-ax.set_title('Distribution of Log Q1 Order Revenue', fontsize=14, fontweight='bold')
-ax.legend(loc=1, fontsize='medium');
-```
-
-
 ![png](Mod%202%20Project_files/Mod%202%20Project_234_0.png)
-
-
-
-```python
-# Visualizing Distribution:
-stats.probplot(df_log_revenue_2013_q1.LogTotalRev, plot = plt),
-stats.probplot(df_log_revenue_2014_q1.LogTotalRev, plot = plt),
-
-plt.show()
-```
 
 
 ![png](Mod%202%20Project_files/Mod%202%20Project_235_0.png)
@@ -2706,12 +1654,7 @@ plt.show()
 stats.ttest_ind(df_log_revenue_2014_q1.LogTotalRev, df_log_revenue_2013_q1.LogTotalRev)
 ```
 
-
-
-
     Ttest_indResult(statistic=1.7014366592724246, pvalue=0.0891875503870743)
-
-
 
 
 ```python
@@ -2722,22 +1665,18 @@ pvalue < .05
 
     0.04459377519353715
 
-
-
-
-
     True
 
 
 
-#### Is Average Q1 Order Revenue for 2014 significantly greater than Average Q1 Order Revenue from 2013?
-```
+#### 5a. Is Average Q1 Order Revenue for 2014 significantly greater than Average Q1 Order Revenue from 2013?
+
 * $H_{0}:$ Average Order Revenue for Q1 2014 is not greater than that of 2013.
 <br>
 * $H_{a}:$ Average Order Revenue for Q1 2014 is greater than that of 2013.
 <br>
 * $\alpha$ = 0.05
-```
+
 
 The p-value = 0.04. Because our p-value < 0.05, we reject the null hypothesis that Average Order Revenue for Q1 2014 is not greater than that of 2013.
 
