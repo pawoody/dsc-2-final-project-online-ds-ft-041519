@@ -1,6 +1,7 @@
 
 ## Northwind Co: Company Sales Analysis
 Flatiron Module 2 Project: Paul Woody
+<br>
 Annotated code can be found [here](https://github.com/pawoody/dsc-2-final-project-online-ds-ft-041519/blob/master/Mod%202%20Project.ipynb).
 
 ![Paul](Paul.jpeg)
