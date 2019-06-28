@@ -9,8 +9,6 @@ For this project, we'll be exploring the data provided by our client, Northwind,
 
 To complete our analysis, we will follow the OSEMN Data Science process as outlined [here](http://www.dataists.com/tag/osemn/).
 
-![OSEMN PROCESS](Data-Science_OSEMN-Framework.png)
-[Credit](https://www.thelead.io/data-science/5-steps-to-a-data-science-project-lifecycle)
 
 ## Provided ERD for Northwind Co:
 ![Northwind ERD](Northwind_ERD.png)
@@ -25,9 +23,6 @@ inspector = inspect(engine)
 # Viewing Table Names to compare with ERD:
 print(inspector.get_table_names())
 ```
-
-    2019-06-24 17:55:07,428 INFO sqlalchemy.engine.base.Engine SELECT name FROM sqlite_master WHERE type='table' ORDER BY name
-    2019-06-24 17:55:07,430 INFO sqlalchemy.engine.base.Engine ()
     ['Category', 'Customer', 'CustomerCustomerDemo', 'CustomerDemographic', 'Employee', 'EmployeeTerritory', 'Order', 'OrderDetail', 'Product', 'Region', 'Shipper', 'Supplier', 'Territory']
 
 
@@ -73,19 +68,7 @@ df_category.head(3)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -127,19 +110,7 @@ df_category.groupby(['CategoryName']).head(10)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -218,22 +189,8 @@ df_product.head(3)
 ```
 
 
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -314,22 +271,8 @@ df_customer.head(3)
 ```
 
 
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -416,15 +359,8 @@ df_customer_demo.head()
 
 ```python
 df_customer_demo_country = df_customer.groupby(['Country'])['CompanyName'].count()
-print(len(df_customer_demo_country))
 df_customer_demo_country
 ```
-
-    21
-
-
-
-
 
     Country
     Argentina       3
@@ -470,22 +406,8 @@ df_employee.head(3)
 ```
 
 
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -587,22 +509,8 @@ df_employee_names.head(10)
 ```
 
 
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -721,19 +629,7 @@ df_employee_terr_pairs.head(10)
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -815,13 +711,9 @@ However, following this line of inquiry may be more productive in a future exper
 df_order.ShipRegion.unique()
 ```
 
-
-
-
     array(['Western Europe', 'South America', 'Central America',
            'North America', 'Northern Europe', 'Scandinavia',
            'Southern Europe', 'British Isles', 'Eastern Europe'], dtype=object)
-
 
 
 By reviewing the unique values for the ShipRegion column, we can determine that ShipRegion maps to the same region descriptions from the Region table, signifying that this data can be used to review regional sales.
@@ -839,27 +731,9 @@ df_region_preview = pd.read_sql_query("""SELECT o.ShipRegion, \
 df_region_preview.head(10)
 ```
 
-    2019-06-24 17:53:41,896 INFO sqlalchemy.engine.base.Engine SELECT o.ShipRegion,             SUM(od.Quantity * od.UnitPrice * (1-od.Discount)) TotalRev             FROM [OrderDetail] od             INNER JOIN [Order] o on o.Id = od.OrderId             GROUP BY o.ShipRegion             ORDER BY TotalRev DESC
-    2019-06-24 17:53:41,897 INFO sqlalchemy.engine.base.Engine ()
-
-
-
-
-
+  
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -951,30 +825,11 @@ However, it should be noted that economy and cultural preference are likely fact
 
 ```python
 # Reviewing Shipper DataFrame:
-print(len(df_shipper.CompanyName))
 df_shipper.head()
 ```
 
-    3
-
-
-
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1017,19 +872,7 @@ df_supplier.head(3)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1280,100 +1123,6 @@ In contrast to our analysis in part 1a., when order quantity is visualized at ea
 
 
 ```python
-df_discount_bool_05 = df_discount_bool[df_discount_bool.Discount.isin([.05])]
-df_discount_bool_10 = df_discount_bool[df_discount_bool.Discount.isin([.1])]
-df_discount_bool_15 = df_discount_bool[df_discount_bool.Discount.isin([.15])]
-df_discount_bool_20 = df_discount_bool[df_discount_bool.Discount.isin([.2])]
-df_discount_bool_25 = df_discount_bool[df_discount_bool.Discount.isin([.25])]
-
-df_discount_bool_05.head()
-```
-
-
-```python
-# Segmenting by discount level to prepare data for Tukey test:
-values = [0.00, 0.05, 0.10, 0.15, 0.20, 0.25]
-df_discount_tukey = df_discount_basic[df_discount_basic.Discount.isin(values)]
-df_discount_tukey.head()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>ProductId</th>
-      <th>UnitPrice</th>
-      <th>Quantity</th>
-      <th>Discount</th>
-      <th>DiscBool</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>11</td>
-      <td>14.0</td>
-      <td>12</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>42</td>
-      <td>9.8</td>
-      <td>10</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>72</td>
-      <td>34.8</td>
-      <td>5</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>14</td>
-      <td>18.6</td>
-      <td>9</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>51</td>
-      <td>42.4</td>
-      <td>40</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-```python
 # Performing Tukey Test to Compare Discount Levels:
 tk = pairwise_tukeyhsd(df_discount_tukey.Quantity, df_discount_tukey.Discount, .05)
 print(tk)
@@ -1445,19 +1194,7 @@ df_discount_spend.head(3)
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1497,76 +1234,6 @@ df_discount_spend.head(3)
   </tbody>
 </table>
 </div>
-
-
-```python
-# Creating a new column to identify presence of Discount/no Discount:
-df_discount_spend['DiscBool'] = df_discount_spend['Discount'].apply(lambda x: 0 if x == 0 else 1)
-df_discount_spend.head(3)
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>OrderId</th>
-      <th>UnitPrice</th>
-      <th>Discount</th>
-      <th>Quantity</th>
-      <th>OrderPrice</th>
-      <th>DiscBool</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>10248</td>
-      <td>34.8</td>
-      <td>0.00</td>
-      <td>5</td>
-      <td>174.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>10249</td>
-      <td>42.4</td>
-      <td>0.00</td>
-      <td>40</td>
-      <td>1696.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>10250</td>
-      <td>16.8</td>
-      <td>0.15</td>
-      <td>15</td>
-      <td>214.2</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 
 
 ```python
@@ -1709,159 +1376,6 @@ plt.show()
 
 
 A visual examination of the distribution of Order Revenue suggests that we should transform the data to fit a normal distribution before modeling and hypothesis testing.
-
-```python
-# Verifying Output:
-print(len(df_log_discount_spend_disc))
-df_log_discount_spend_disc.head(3)
-```
-
-    308
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>OrderId</th>
-      <th>UnitPrice</th>
-      <th>Discount</th>
-      <th>Quantity</th>
-      <th>OrderPrice</th>
-      <th>DiscBool</th>
-      <th>LogOrderPrice</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2</th>
-      <td>10250</td>
-      <td>16.8</td>
-      <td>0.15</td>
-      <td>15</td>
-      <td>214.20</td>
-      <td>1</td>
-      <td>5.366910</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>10258</td>
-      <td>25.6</td>
-      <td>0.20</td>
-      <td>6</td>
-      <td>122.88</td>
-      <td>1</td>
-      <td>4.811208</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>10260</td>
-      <td>12.0</td>
-      <td>0.25</td>
-      <td>21</td>
-      <td>189.00</td>
-      <td>1</td>
-      <td>5.241747</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-```python
-# Verifying Output:
-print(len(df_log_discount_spend_nodisc))
-df_log_discount_spend_nodisc.head(3)
-```
-
-    522
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>OrderId</th>
-      <th>UnitPrice</th>
-      <th>Discount</th>
-      <th>Quantity</th>
-      <th>OrderPrice</th>
-      <th>DiscBool</th>
-      <th>LogOrderPrice</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>10248</td>
-      <td>34.8</td>
-      <td>0.0</td>
-      <td>5</td>
-      <td>174.0</td>
-      <td>0</td>
-      <td>5.159055</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>10249</td>
-      <td>42.4</td>
-      <td>0.0</td>
-      <td>40</td>
-      <td>1696.0</td>
-      <td>0</td>
-      <td>7.436028</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>10251</td>
-      <td>16.8</td>
-      <td>0.0</td>
-      <td>20</td>
-      <td>336.0</td>
-      <td>0</td>
-      <td>5.817111</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
 
 
 ```python
@@ -2212,19 +1726,7 @@ df_discount_category_spend.head(3)
 ```
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2596,19 +2098,7 @@ df_employee_sales_overview.head(50)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2868,19 +2358,7 @@ df_employee_sales_2013.head(10)
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3045,10 +2523,6 @@ df_revenue_2014.groupby(['Month'])['OrderPrice'].sum()
 ```
 
     2014-05-06
-
-
-
-
 
     Month
     01     94222.1105
